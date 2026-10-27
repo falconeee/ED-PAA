@@ -55,28 +55,20 @@ print("Kendall τ:", kendall_tau(A, B))
 '''
 Análise do comportamento pela relação de recorrência:
 
-Pré-processamento: construir pos e C custa Θ(n).
+Construir pos e C custa Θ(n).
 
-Contagem de inversões (merge sort modificado): seja T(n) o tempo para n elementos.
-A divisão custa Θ(1), resolvemos duas metades de tamanho ~n/2 e a combinação
-(merge_conta) percorre os n elementos uma vez, contando as inversões "cruzadas"
+Sendo T(n) o tempo para n elementos.
+A divisão custa Θ(1), resolvendo as duas metades de tamanho ~n/2 e com a combinação
+(merge_conta) percorrendo os n elementos uma vez, contando as inversões "cruzadas"
 em Θ(1) por elemento:
 
     T(1) = Θ(1)
     T(n) = 2·T(n/2) + Θ(n)
 
 Teorema mestre: a = 2, b = 2, f(n) = Θ(n) = Θ(n^(log_2 2)) → caso 2,
-logo T(n) = Θ(n log n).
+T(n) = Θ(n log n).
 
 Total: Θ(n) + Θ(n log n) = Θ(n log n) de tempo e Θ(n) de espaço extra
 (pos, C e aux).
 
-Corretude da contagem: um par i < j é inversão de C se C[i] > C[j], ou seja, se
-A[i] aparece antes de A[j] em A mas depois em B — exatamente os pares contados
-pela distância τ. Toda inversão está inteira na metade esquerda, inteira na
-direita (contadas recursivamente) ou atravessa as metades (contadas no merge).
-
-Comparação: o algoritmo ingênuo testa todos os n(n-1)/2 pares, custando Θ(n²).
-Exemplo: A = [3, 1, 2, 4], B = [1, 2, 3, 4] → C = [2, 0, 1, 3], cujas inversões
-são (2,0) e (2,1); portanto τ = 2 (pares {3,1} e {3,2}).
 '''

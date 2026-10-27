@@ -81,17 +81,13 @@ if __name__ == "__main__":
 '''
 Análise do comportamento pela relação de recorrência:
 
-Pré-processamento (closest_pair): ordenar os pontos por x e por y custa
-Θ(n log n), feito uma única vez.
+O pré-processamento de ordenar os pontos por x e por y custaΘ(n log n) que é feito uma vez só.
 
-Seja T(n) o tempo de closest_pair_rec para n pontos:
+Sendo T(n) o tempo de closest_pair_rec para n pontos:
   - divisão: fatiar px e separar py em esq_y/dir_y preservando a ordem por y
-    custa Θ(n) (por isso mantemos py pré-ordenado em vez de reordenar a cada
-    chamada);
+    custa Θ(n);
   - conquista: duas chamadas com ⌈n/2⌉ e ⌊n/2⌋ pontos;
-  - combinação: montar a faixa custa Θ(n) e, como dentro de um retângulo
-    d × 2d cabem no máximo 8 pontos com distância mútua ≥ d, cada ponto da
-    faixa é comparado com no máximo 7 seguintes, ou seja, Θ(n) no total.
+  - combinação: montar a faixa custa Θ(n).
 
     T(n) = Θ(1),                      n ≤ 3
     T(n) = 2·T(n/2) + Θ(n),           n > 3
@@ -100,8 +96,6 @@ Teorema mestre: a = 2, b = 2, f(n) = Θ(n) = Θ(n^(log_2 2)) → caso 2,
 logo T(n) = Θ(n log n).
 
 Total: Θ(n log n) + Θ(n log n) = Θ(n log n), contra Θ(n²) da força bruta
-(n(n-1)/2 pares). Para N = 10000 isso é ~1.3·10^5 operações contra ~5·10^7.
+(n(n-1)/2 pares). Para N = 10000 isso da ~1.3·10^5 operações contra ~5·10^7.
 
-Observação: se a ordenação por y fosse refeita em cada chamada, a recorrência
-seria T(n) = 2·T(n/2) + Θ(n log n) = Θ(n log² n).
 '''
